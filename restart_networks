@@ -1,0 +1,4 @@
+# This is to be run in a shell
+# I use this to restart interfaces non-interactively with BetterTouchTool, with a hotkey
+
+osascript -e "do shell script \"ifconfig en0 down && ifconfig en5 down && sleep 4 && ifconfig en5 up && ifconfig en0 up\" with administrator privileges"

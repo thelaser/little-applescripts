@@ -1,0 +1,24 @@
+# Takes the current front application, restarts it, and fullscreens it
+# I use it when spotify decides it doesn't want to play music anymore.
+# Best used with a shortcut in BetterTouchTool
+
+tell application "System Events" 
+	set frontApp to name of first application process whose frontmost is true
+end tell
+
+display notification frontApp with title "Application restart:"
+
+tell application frontApp to quit
+repeat
+	tell application "System Events"
+		if frontApp is not in (name of application processes) then exit repeat
+	end tell
+	do shell script "sleep 0.5"
+end repeat
+tell application frontApp to launch
+
+do shell script "sleep 2"
+
+tell application "System Events" to tell process frontApp
+	set value of attribute "AXFullScreen" of window 1 to true
+end tell
